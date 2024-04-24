@@ -1,0 +1,95 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Maryland School Board Spending Records</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+      <div class="container">
+        <h1 class="mt-4 mb-4">Search Spending Records</h1>
+        <div class="row">
+          <div class="col-md-6">
+            <form action="{{ url_for('search') }}" method="post" class="mb-4">
+              <div class="form-group">
+                <input type="text" name="search_term" class="form-control" placeholder="Search by Payee Name">
+              </div>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+          </div>
+          <div class="col-md-3">
+            <form action="{{ url_for('redirect_to_jurisdiction') }}" method="post">
+              <select name="slug">
+                  {% for jurisdiction in jurisdictions %}
+                  <option value="{{ jurisdiction.slug }}">{{ jurisdiction.agency_name.title() }}</option>
+                  {% endfor %}
+              </select>
+              <button type="submit">Go</button>
+          </form>
+          </div>
+        </div>
+    
+        {% if jurisdictions %}
+          <h2>Jurisdictions</h2>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Agency Name</th>
+                <th>Total Records</th>
+                <th>Total Spending</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for jurisdiction in jurisdictions %}
+                <tr>
+                  <td>{{ jurisdiction.agency_name.title() }}</td>
+                  <td>{{ "{:,}".format(jurisdiction.total_records) }}</td>
+                  <td>${{ "{:,.2f}".format(jurisdiction.total_amount) }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>      
+          </table>
+        {% endif %}
+        
+        {% if results %}
+          <h2>Search Results</h2>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Agency Name</th>
+                <th>Amount</th>
+                <th>Fiscal Year</th>
+                <th>Payee Name</th>
+                <th>Payee Zip</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for record in results %}
+                <tr>
+                  <td>{{ record.agency_name.title() }}</td>
+                  <td>${{ "{:,.2f}".format(record.amount) }}</td>
+                  <td>{{ record.fiscal_year }}</td>
+                  <td>{{ record.payee_name }}</td>
+                  <td>{{ record.payee_zip }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>      
+          </table>
+        {% endif %}
+      </div>
+    
+      <!-- Bootstrap JS and dependencies -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+    </html>
+    
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
