@@ -42,3 +42,10 @@ Model Definitions:
 
 4. `jurisdiction(slug)`: This function handles the route for displaying jurisdiction details. It takes the slug of the jurisdiction as a parameter, retrieves the jurisdiction details from the database based on the slug, and fetches associated vendor records. Finally, it renders the `jurisdiction.html` template, passing the jurisdiction and vendor records as context.
 
+### Run the app in Codespaces
+
+Create a codespace, then in the terminal run the following commands:
+
+1. pip install -r requirements.txt
+2. python app.py
+
