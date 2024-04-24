@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Jurisdiction Details</title>
+    <title>Maryland School Board Spending Records - {{ jurisdiction.agency_name.title() }}</title>
     <!-- Include CSS styles for Feltron numbers -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wayou/t-rex@1.0.0/dist/t-rex.css">
     <!-- Include CSS styles for pagination -->
@@ -15,10 +15,9 @@
                 <li class="breadcrumb-item active" aria-current="page">Jurisdiction Details</li>
             </ol>
         </nav>
-        <h1>Jurisdiction Details</h1>
+        <h1>{{ jurisdiction.agency_name.title() }} Spending Details</h1>
         <div class="row">
             <div class="col-md-4">
-                <h2>{{ jurisdiction.agency_name.title() }}</h2>
                 <div class="feltron">
                     <div class="t-rex" data-number="{{ jurisdiction.total_records }}">Total Records: {{ "{:,}".format(jurisdiction.total_records) }}</div>
                     <div class="t-rex" data-number="{{ jurisdiction.total_amount }}">Total Amount: ${{ "{:,.2f}".format(jurisdiction.total_amount) }}</div>

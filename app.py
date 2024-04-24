@@ -56,7 +56,7 @@ def search():
     search_term = request.form.get('search_term')
     # Search for vendors containing the search term in payee name and order by amount
     results = Vendors.select().where(Vendors.payee_name.contains(search_term)).order_by(Vendors.amount.desc())
-    return render_template('index.html', results=results)
+    return render_template('index.html', results=results, search_term=search_term)
 
 # Route for handling form submission and redirection to jurisdiction page
 @app.route("/redirect", methods=["POST"])
